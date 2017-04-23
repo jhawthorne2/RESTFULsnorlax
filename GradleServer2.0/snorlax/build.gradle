@@ -1,9 +1,10 @@
+
 group 'snorlax'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.5
+sourceCompatibility = 1.6
 
 repositories {
     mavenCentral()
@@ -13,4 +14,9 @@ dependencies {
     //The firebase things we need
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile 'com.google.firebase:firebase-admin:4.1.7'
+
+    compile "com.sparkjava:spark-core:2.5.5"
+
 }
