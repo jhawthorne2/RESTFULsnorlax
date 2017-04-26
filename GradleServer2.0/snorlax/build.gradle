@@ -27,6 +27,7 @@ repositories {
 dependencies {
     //The firebase things we need
 
+    compile 'com.sparkjava:spark-core:2.3'
     testCompile group: 'junit', name: 'junit', version: '4.11'
 
     compile 'com.google.firebase:firebase-admin:4.1.7'
