@@ -65,7 +65,7 @@ public class RESTfulController {
         }
     }
 
-    @RequestMapping(method= RequestMethod.POST, value="/login")
+    @RequestMapping(method= RequestMethod.GET, value="/login")
     public String login(@RequestParam(value = "username", defaultValue = "") String username, @RequestParam(value = "password", defaultValue = "") String password) {
         //firebase lookup to make sure username/pass combo is correct
         checkedUser = false;
