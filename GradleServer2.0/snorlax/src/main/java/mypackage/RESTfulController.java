@@ -83,16 +83,22 @@ public class RESTfulController {
 
     // add a NEW entity to the database
     @RequestMapping(method= RequestMethod.POST, value="/entity")
-    public Object addEntity(@RequestParam(value = "id") String uid, @RequestParam(value = "isA") String isA, @RequestParam(value = "roomNum") String roomNum, @RequestParam(value = "contains") String contains,
+    public Object addEntity(@RequestParam(value="tokenID", defaultValue = "") String tokenID, @RequestParam(value = "id") String uid, @RequestParam(value = "isA") String isA, @RequestParam(value = "roomNum") String roomNum, @RequestParam(value = "contains") String contains,
                           @RequestParam(value = "annotatedBy") String annotatedBy, @RequestParam(value = "illustratedBy") String illustratedBy) throws IOException {
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("entities");
-        Entity newE = new Entity(uid, roomNum, isA, contains, annotatedBy, illustratedBy);
+        checkedToken = false;
+        if(tokenIsValid(tokenID)) {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("entities");
+            Entity newE = new Entity(uid, roomNum, isA, contains, annotatedBy, illustratedBy);
 
-        System.out.println("Adding new entity!");
-        ref.child(uid).setValue(newE);
+            System.out.println("Adding new entity!");
+            ref.child(uid).setValue(newE);
 
-        return newE;
+            return newE;
+        }
+        else{
+            return "Token invalid. Please re-login to access the Scavenger system.";
+        }
     }
 
     private static void getLocationInfo(String id) throws InterruptedException {
