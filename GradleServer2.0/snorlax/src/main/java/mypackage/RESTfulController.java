@@ -46,7 +46,7 @@ public class RESTfulController {
         }
     }
 
-    @RequestMapping("/entity")
+    @RequestMapping(method= RequestMethod.GET, value="/entity")
     public Object getEntity(@RequestParam(value="tokenID", defaultValue = "") String tokenID, @RequestParam(value = "id", defaultValue = "uniqueID1") String uid) throws IOException, InterruptedException { //binds the value of the query string param id into the id param of entity method
         checkedToken = false;
         if(tokenIsValid(tokenID)) {
@@ -65,7 +65,7 @@ public class RESTfulController {
         }
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(method= RequestMethod.POST, value="/login")
     public String login(@RequestParam(value = "username", defaultValue = "") String username, @RequestParam(value = "password", defaultValue = "") String password) {
         //firebase lookup to make sure username/pass combo is correct
         checkedUser = false;
@@ -73,7 +73,7 @@ public class RESTfulController {
         checkedUser = false;
         return result;
     }
-    @RequestMapping("/newUser")
+    @RequestMapping(method= RequestMethod.POST, value="/newUser")
     public User newUser(@RequestParam(value = "username", defaultValue = "") String username, @RequestParam(value = "password", defaultValue = "") String password){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         User u = new User(username, password);
